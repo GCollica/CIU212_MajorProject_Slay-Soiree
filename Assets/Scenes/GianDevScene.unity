@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &79043628
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -215,7 +215,8 @@ GameObject:
   - component: {fileID: 89924356}
   - component: {fileID: 89924355}
   - component: {fileID: 89924354}
-  m_Layer: 9
+  - component: {fileID: 89924357}
+  m_Layer: 10
   m_Name: BasicEnemy (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +292,6 @@ MonoBehaviour:
   movementSpeed: 200
   nextWaypointDistance: 0.25
   reachedEndOfPath: 0
-  currentTime: 0
 --- !u!114 &89924356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +320,22 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!58 &89924357
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89924351}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2
 --- !u!1 &165331449
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &829860585
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -835,7 +851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1287957784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,7 +961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358990840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1.69, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1079,7 +1095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1930248183
 Transform:
   m_ObjectHideFlags: 0
@@ -1154,7 +1170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1941720413}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,10 +1249,10 @@ SpriteRenderer:
   m_SortingLayerID: 1059917663
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 36c525879fcd02b4a9e6cf27da12ccd3, type: 3}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a1c19b963c9b91248ac2a468ade7d5e7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
+  m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.94, y: 2.99}
   m_AdaptiveModeThreshold: 0.5
@@ -1252,8 +1268,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100488394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.22, y: 7.91, z: 0}
-  m_LocalScale: {x: 0.96970606, y: 1.2314062, z: 1}
+  m_LocalPosition: {x: -0.01, y: 5.01, z: 0}
+  m_LocalScale: {x: 0.9609375, y: 0.5540586, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
