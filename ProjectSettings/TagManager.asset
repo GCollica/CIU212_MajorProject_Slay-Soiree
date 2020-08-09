@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Walkable
+  - Not_Walkable
+  - Enemy
+  - Player
   - 
   - 
   - 
