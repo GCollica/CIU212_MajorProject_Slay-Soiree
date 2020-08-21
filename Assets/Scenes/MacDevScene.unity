@@ -216,11 +216,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 220043521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4593b93b72116945ad6e51feb363420, type: 3}
+  m_Script: {fileID: 11500000, guid: edb7248ca6893d245b3d2d166aec6b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basemoveSpeed: 3
-  rb: {fileID: 220043525}
+  playerSpeed: 0
+  baseSpeed: 3
+  forceMult: 10
 --- !u!50 &220043525
 Rigidbody2D:
   serializedVersion: 4
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 250545293}
 --- !u!1 &250545291
 GameObject:
   m_ObjectHideFlags: 0
