@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField]
+    private int playerIndex = 0;
+
+    //Starting speed for player
+    [SerializeField]
+    private float baseSpeed;
+
     //Speed stat that changes with items
     public float playerSpeed;
-    //Starting speed for player
-    public float baseSpeed;
 
     //Unity auto-generated input script
-    private PlayerInput controls;
+    private PlayerInputMap controls;
 
     //For calculating movement for character
     Vector2 move;
     private Vector2 targetVelocity;
-    //Acceleration rate
+    //Acceleration rat
     public float forceMult;
 
     private Rigidbody2D rb;
@@ -24,69 +29,42 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        //Input set up
-        controls = new PlayerInput();
-        
-        //Light attack
-        controls.Player.LightAttack.performed += context => LightAttack();
-        
+        controls = new PlayerInputMap();
+
         //Movement with left joystick
-        controls.Player.Movement.performed += context => move = context.ReadValue<Vector2>();
-        controls.Player.Movement.canceled += context => move = Vector2.zero;
+        //controls.Player.Movement.performed += context => move = context.ReadValue<Vector2>();
+        //controls.Player.Movement.canceled += context => move = Vector2.zero;
+    }
 
-        //Heavy attack
-        controls.Player.HeavyAttack.performed += context => HeavyAttack();
-
-        //Interact
-        controls.Player.Interact.performed += context => Interact();
-
-        //Item
+    public void SetInputVector(Vector2 direction)
+    {
+        move = direction;
     }
 
     void FixedUpdate()
     {
         //Assigns "m" to the Vector2 value of the left joystick axes
         Vector2 m = new Vector2(move.x, move.y);
-        
+
         //Sets the velocity to accelerate to
         targetVelocity = m * ((baseSpeed + playerSpeed) * 100) * Time.fixedDeltaTime;
-        
+
         //Calculates the amount of force delivered each frame
         Vector2 force = (targetVelocity - rb.velocity) * forceMult;
-        
+
         //Adds force
         rb.AddForce(force);
+
+        Move(m);
     }
 
-    void Interact()
+    public int GetPlayerIndex()
     {
-        Debug.Log("Interact!");
-    }
-
-    void LightAttack()
-    {
-        Debug.Log("Light Attack!");
-    }
-
-    void HeavyAttack()
-    {
-        Debug.Log("Heavy Attack!");
+        return playerIndex;
     }
 
     void Move(Vector2 direction)
     {
-        Debug.Log("Moveing!" + direction);
-    }
-
-    //Enables controls when we need them
-    void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    //Disables controls when we don't need them
-    void OnDisable()
-    {
-        controls.Disable();
+        Debug.Log("Moving!" + direction);
     }
 }
