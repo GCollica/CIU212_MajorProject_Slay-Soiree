@@ -28,16 +28,12 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
         controls = new PlayerInputMap();
-
-        //Movement with left joystick
-        //controls.Player.Movement.performed += context => move = context.ReadValue<Vector2>();
-        //controls.Player.Movement.canceled += context => move = Vector2.zero;
     }
 
     public void SetInputVector(Vector2 direction)
     {
+        //Sets the Vector2 value taken from the PlayerInputHandler script
         move = direction;
     }
 
@@ -60,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int GetPlayerIndex()
     {
+        //Returns the index of the player (Index 0-3/Player 1-4) 
         return playerIndex;
     }
 
