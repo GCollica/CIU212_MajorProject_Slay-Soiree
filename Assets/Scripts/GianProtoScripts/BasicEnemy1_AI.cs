@@ -1,71 +1,173 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Pathfinding;
 
 public class BasicEnemy1_AI : MonoBehaviour
 {
-    public enum AIState {Idle, PursuingTarget, AttackingTarget};
+    //Data references for state machine components of the code.
+    public enum AIState {Idle, FindingTarget, PursuingTarget, AttackingTarget};
     public AIState currentAIState = AIState.Idle;
 
+    //Data references for multi-use components of the code.
     private Rigidbody2D rigidBody;
+    private Transform targetTransform;
+
+    //Date references for idle state of the code.
+    private float idleDelayTimer = 0f;
+    private float idleDelayLength = 1f;
+
+    //Data references for pathfinding components of the code.
     private Seeker seeker;
-
-    public Transform targetTransform;
-    public float movementSpeed = 10f;
-    public float nextWaypointDistance = 3f;
-
     private Path currentPath;
-    private int currentWaypoint = 0;
-    private bool creatingPath = false;
-    public bool reachedEndOfPath = false;
 
+    private bool creatingPath = false;
+    private bool reachedEndOfPath = false;
+
+    private int currentWaypoint = 0;
+
+    public float movementSpeed = 10f;
+    private float nextWaypointDistance = 3f;
     private float updatePathTimer = 0f;
     private float updatePathInterval = .25f;
 
-    public GameObject attackParent;
-    public GameObject attackCollider;
-    public Transform attackStartPos;
-    public Transform attackMidPos;
-    public Transform attackEndPos;
+    //Data references for attacking compoonents of the code.
+    private GameObject attackParent;
 
+    private Transform attackPos1;
+    private Transform attackPos2;
+    private Transform attackPos3;
 
+    public List<GameObject> attackTargets;
+
+    private GameObject[] totalPlayers;
+    public RaycastHit2D[] raycastHits;
+
+    private bool inAttackRange = false;
+
+    private float attackSequenceTimer = 0f;
+    private float attackSequenceInterval = .3f;
     void Awake()
     {
         rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
         seeker = this.gameObject.GetComponent<Seeker>();
         attackParent = FindChildGameObject(this.gameObject, "Attack_Direction");
-        attackCollider = FindChildGameObject(attackParent, "Attack_Collider");
-        attackStartPos = FindChildGameObject(attackParent, "Attack_StartPos").transform;
-        attackMidPos = FindChildGameObject(attackParent, "Attack_MidPos").transform;
-        attackEndPos = FindChildGameObject(attackParent, "Attack_EndPos").transform;
-        ResetAttackPos();
+        attackPos1 = FindChildGameObject(attackParent, "Attack_Pos1").transform;
+        attackPos2 = FindChildGameObject(attackParent, "Attack_Pos2").transform;
+        attackPos3 = FindChildGameObject(attackParent, "Attack_Pos3").transform;
+
+    }
+  
+    void FixedUpdate()
+    {
+        switch (currentAIState)
+        {
+            case AIState.Idle:
+                
+                ClearPath();
+                if(idleDelayTimer < idleDelayLength)
+                {
+                    idleDelayTimer += Time.deltaTime;
+                }
+                else if(idleDelayTimer >= idleDelayLength)
+                {
+                    currentAIState = AIState.FindingTarget;
+                }
+                break;
+
+            case AIState.FindingTarget:
+
+                idleDelayTimer = 0f;
+                InitialiseTargets();
+                FindNearestTarget();
+                currentAIState = AIState.PursuingTarget;
+                break;
+
+            case AIState.PursuingTarget:
+
+                SetFacingDirection();
+                PursureTarget();
+                //TargetRangeCheck();
+                if(inAttackRange == true)
+                {
+                    currentAIState = AIState.AttackingTarget;
+                }
+                break;
+
+            case AIState.AttackingTarget:
+                
+                attackSequenceTimer += Time.deltaTime;
+                SetAttackDirection();
+                if (inAttackRange == false)
+                {
+                    currentAIState = AIState.FindingTarget;
+                }
+
+                if (attackSequenceTimer < attackSequenceInterval)
+                {
+                    AttackRaycast(1);
+                    if (inAttackRange == false)
+                    {
+                        currentAIState = AIState.FindingTarget;
+                    }
+                }
+                if(attackSequenceTimer > attackSequenceInterval && attackSequenceTimer < (attackSequenceInterval * 2))
+                {
+                    AttackRaycast(2);
+                    if (inAttackRange == false)
+                    {
+                        currentAIState = AIState.FindingTarget;
+                    }
+                }
+                if(attackSequenceTimer > (attackSequenceInterval * 2) && attackSequenceTimer < (attackSequenceInterval * 3))
+                {
+                    AttackRaycast(3);
+                    if (inAttackRange == false)
+                    {
+                        currentAIState = AIState.FindingTarget;
+                    }
+                }
+                if(attackSequenceTimer > (attackSequenceInterval * 3))
+                {
+                    ExecuteAttacks();
+                    attackSequenceTimer = 0f;
+                    //TargetRangeCheck();
+                    if(inAttackRange == false)
+                    {
+                        currentAIState = AIState.FindingTarget;
+                    }
+                }
+
+                break;
+
+            default:
+                break;
+        }
 
     }
 
-    
-    void FixedUpdate()
+    //Initialises totalPlayers array.
+    private void InitialiseTargets()
     {
-        if(currentAIState == AIState.Idle)
-        {
-            ClearPath();
-            return;
-        }
-        else if(currentAIState == AIState.PursuingTarget)
-        {
-            SetFacingDirection();
-            PursureTarget();
+        totalPlayers = GameObject.FindGameObjectsWithTag("Player");
+    }
 
-        }
-        else if (currentAIState == AIState.AttackingTarget)
+    //Finds current closest target to this enemy.
+    private void FindNearestTarget()
+    {
+        float closestDistance = (totalPlayers[0].transform.position - this.gameObject.transform.position).magnitude;
+        GameObject closestPlayer = totalPlayers[0];
+
+        foreach (GameObject player in totalPlayers)
         {
-            SetAttackDirection();
-        }
-        else
-        {
-            return;
+            if((player.transform.position - this.gameObject.transform.position).magnitude < closestDistance)
+            {
+                closestPlayer = player;
+            }
         }
 
+        targetTransform = closestPlayer.transform;
     }
 
     //Function to run in update which creates a path for the ai to the target on an interval and moves the enemy along the path
@@ -134,11 +236,11 @@ public class BasicEnemy1_AI : MonoBehaviour
             currentWaypoint = 0;
             creatingPath = false;
 
-            Debug.Log("Created Path Successfully");
+            //Debug.Log("Created Path Successfully");
         }
     }
 
-    //Clears current path
+    //Clears current path.
     private void ClearPath()
     {
         if(currentPath != null)
@@ -147,7 +249,7 @@ public class BasicEnemy1_AI : MonoBehaviour
         }
     }
 
-    //Sets characters Facing Direction by flipping the sprite
+    //Sets characters Facing Direction by flipping the sprite.
     private void SetFacingDirection()
     {
         if (rigidBody.velocity.x > 0)
@@ -160,14 +262,14 @@ public class BasicEnemy1_AI : MonoBehaviour
         }
     }
 
-    //Sets characters attack direction
+    //Sets characters attack direction.
     private void SetAttackDirection()
     {
         attackParent.transform.right = (targetTransform.transform.position - attackParent.transform.position);
         
     }
 
-    //Small function to find a child Gameobject given the parent and childs name
+    //Small function to find a child Gameobject given the parent and childs name.
     private GameObject FindChildGameObject(GameObject parent, string childName)
     {
         GameObject result;
@@ -177,13 +279,124 @@ public class BasicEnemy1_AI : MonoBehaviour
         return result;
     }
 
-    private void Attack()
+    //Turns on and off circlecasts used for attack sequence, attackPos input is used for the sequential nature of the check.
+    private void AttackRaycast(int attackPos)
     {
-        
+        switch (attackPos)
+        {
+            case 1:
+                
+                raycastHits = Physics2D.CircleCastAll(attackPos1.position, 1f, (this.transform.position - attackPos1.position));
+
+                if (raycastHits.Length > 0)
+                {
+                    foreach (RaycastHit2D hit in raycastHits)
+                    {
+                        if (hit.collider.CompareTag("Player"))
+                        {
+                            //Debug.Log("Player " + hit.collider.gameObject.name.ToString() + " Collider Hit");
+
+                            if (attackTargets.Contains(hit.collider.gameObject) != true)
+                            {
+                                attackTargets.Add(hit.collider.gameObject);
+                            }
+                        }
+                    }
+
+                    Array.Clear(raycastHits, 0, raycastHits.Length);
+                }
+                break;
+
+            case 2:
+
+                raycastHits = Physics2D.CircleCastAll(attackPos2.position, 1f, (this.transform.position - attackPos2.position));
+
+                if (raycastHits.Length > 0)
+                {
+                    foreach (RaycastHit2D hit in raycastHits)
+                    {
+                        if (hit.collider.CompareTag("Player"))
+                        {
+                            //Debug.Log("Player " + hit.collider.gameObject.name.ToString() + " Collider Hit");
+
+                            if (attackTargets.Contains(hit.collider.gameObject) != true)
+                            {
+                                attackTargets.Add(hit.collider.gameObject);
+                            }
+                        }
+                    }
+
+                    Array.Clear(raycastHits, 0, raycastHits.Length);
+                }
+                break;
+
+            case 3:
+
+                raycastHits = Physics2D.CircleCastAll(attackPos3.position, 1f, (this.transform.position - attackPos3.position));
+
+                if (raycastHits.Length > 0)
+                {
+                    foreach (RaycastHit2D hit in raycastHits)
+                    {
+                        if (hit.collider.CompareTag("Player"))
+                        {
+                            //Debug.Log("Player " + hit.collider.gameObject.name.ToString() + " Collider Hit");
+
+                            if (attackTargets.Contains(hit.collider.gameObject) != true)
+                            {
+                                attackTargets.Add(hit.collider.gameObject);
+                            }
+                        }
+                    }
+
+                    Array.Clear(raycastHits, 0, raycastHits.Length);
+                }
+                break;
+
+            default:
+                break;
+
+        }
     }
 
-    private void ResetAttackPos()
+    //Executes attacks based on targets chosen from the AttackRaycast function. *Needs check as it throws an error*
+    private void ExecuteAttacks()
     {
-        attackCollider.transform.position = attackStartPos.position;
+        if(attackTargets != null)
+        {
+            if (attackTargets.Count > 0)
+            {
+                foreach (GameObject target in attackTargets)
+                {
+                    Debug.Log("Executed attack on " + target.name);
+                    //Perform Attacks.
+                    attackTargets.Remove(target);
+                }
+            }
+        }      
+    }
+
+    //Basic check for whether the enemy is within attack range of the current target.
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("Player"))
+        {
+            if(collider.gameObject == targetTransform.gameObject)
+            {
+                inAttackRange = true;
+            }
+        }
+    }
+    
+    //Basic check for whether the enemy has left attack range of the current target.
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            if (collider.gameObject == targetTransform.gameObject)
+            {
+                inAttackRange = false;
+            }
+        }
     }
 }
