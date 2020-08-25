@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Vector2 left, right;
+
+
+
     [SerializeField]
     private int playerIndex = 0;
 
@@ -29,12 +33,33 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         controls = new PlayerInputMap();
+
+        left = new Vector2(0.60343f, 0.60343f);
+        right = new Vector2(-0.60343f, 0.60343f);
     }
 
     public void SetInputVector(Vector2 direction)
     {
         //Sets the Vector2 value taken from the PlayerInputHandler script
         move = direction;
+    }
+
+    void Update()
+    {
+        TurnPlayer();
+    }
+
+    void TurnPlayer()
+    {
+        if (move.x <= -0.1)
+        {
+            gameObject.transform.localScale = left;
+        }
+
+        if (move.x >= 0.1)
+        {
+            gameObject.transform.localScale = right;
+        }
     }
 
     void FixedUpdate()
@@ -48,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         //Calculates the amount of force delivered each frame
         Vector2 force = (targetVelocity - rb.velocity) * forceMult;
 
-        //Adds force
+        //Moves player forwards
         rb.AddForce(force);
 
         Move(m);
@@ -62,6 +87,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move(Vector2 direction)
     {
-        Debug.Log("Moving!" + direction);
+        //Debug.Log("Moving!" + direction);
     }
 }

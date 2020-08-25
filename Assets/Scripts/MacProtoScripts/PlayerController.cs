@@ -4,28 +4,31 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //Unity auto-generated input script
-    private PlayerInputMap controls;   
+    // Unity auto-generated input script | All scripts that require input from the player must reference this script
+    private PlayerInputMap controls;
+    private PlayerCombat playerCombat;
 
     void Awake()
     {
-        //Input set up
+        playerCombat = FindObjectOfType<PlayerCombat>();
+
+        // PlayerInputMap must be referenced in this manner to work
         controls = new PlayerInputMap();
         
-        //Light attack
+        // Light attack
         controls.Player.LightAttack.performed += context => LightAttack();
 
-        //Heavy attack
+        // Heavy attack
         controls.Player.HeavyAttack.performed += context => HeavyAttack();
 
-        //Interact
+        // Interact
         controls.Player.Interact.performed += context => Interact();
 
-        //Item
+        // Item
 
     }
    
-    //What happens for each input press
+    // What happens for each input press
     void Interact()
     {
         Debug.Log("Interact!");
@@ -34,10 +37,12 @@ public class PlayerController : MonoBehaviour
     void LightAttack()
     {
         Debug.Log("Light Attack!");
+        playerCombat.LightAttack();
     }
 
     void HeavyAttack()
     {
         Debug.Log("Heavy Attack!");
+        playerCombat.HeavyAttack();
     }
 }
