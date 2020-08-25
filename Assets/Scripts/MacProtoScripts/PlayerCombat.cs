@@ -5,12 +5,23 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
 
+    private PlayerMovement playerMovement;
+
+    private int playerIndex = 0;
+
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
+    void FixedUpdate()
+    {
+        //Vector2 looDir = playerMovement.m - gameObject.position;
+    }
+
     public void LightAttack()
     {
+        Debug.Log("Light Attack!");
+
         // Play attack animation
 
         // Detect enemies in range of attack
@@ -25,6 +36,8 @@ public class PlayerCombat : MonoBehaviour
 
     public void HeavyAttack()
     {
+        Debug.Log("Heavy Attack!");
+
         // Play attack animation
 
         // Detect enemies in range of attack
@@ -35,6 +48,22 @@ public class PlayerCombat : MonoBehaviour
         {
             Debug.Log("We hit" + enemy.name + "with a heavy attack!");
         }
+    }
+
+    public void Interact()
+    {
+        Debug.Log("Interacted!");
+    }
+
+    public void ActiveItem()
+    {
+        Debug.Log("Used active item!");
+    }
+
+    public int GetPlayerIndex()
+    {
+        //Returns the index of the player (Index 0-3/Player 1-4) 
+        return playerIndex;
     }
 
     void OnDrawGizmosSelected()

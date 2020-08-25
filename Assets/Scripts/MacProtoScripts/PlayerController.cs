@@ -4,45 +4,45 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Unity auto-generated input script | All scripts that require input from the player must reference this script
-    private PlayerInputMap controls;
-    private PlayerCombat playerCombat;
+    //// Unity auto-generated input script | All scripts that require input from the player must reference this script
+    //private PlayerInputMap controls;
+    //private PlayerCombat playerCombat;
 
-    void Awake()
-    {
-        playerCombat = FindObjectOfType<PlayerCombat>();
+    //void Awake()
+    //{
+    //    playerCombat = FindObjectOfType<PlayerCombat>();
 
-        // PlayerInputMap must be referenced in this manner to work
-        controls = new PlayerInputMap();
+    //    // PlayerInputMap must be referenced in this manner to work
+    //    controls = new PlayerInputMap();
         
-        // Light attack
-        controls.Player.LightAttack.performed += context => LightAttack();
+    //    // Light attack
+    //    controls.Player.LightAttack.performed += context => LightAttack();
 
-        // Heavy attack
-        controls.Player.HeavyAttack.performed += context => HeavyAttack();
+    //    // Heavy attack
+    //    controls.Player.HeavyAttack.performed += context => HeavyAttack();
 
-        // Interact
-        controls.Player.Interact.performed += context => Interact();
+    //    // Interact
+    //    controls.Player.Interact.performed += context => Interact();
 
-        // Item
+    //    // Item
 
-    }
+    //}
    
-    // What happens for each input press
-    void Interact()
-    {
-        Debug.Log("Interact!");
-    }
+    //// What happens for each input press
+    //void Interact()
+    //{
+    //    Debug.Log("Interact!");
+    //}
 
-    void LightAttack()
-    {
-        Debug.Log("Light Attack!");
-        playerCombat.LightAttack();
-    }
+    //void LightAttack()
+    //{
+    //    Debug.Log("Light Attack!");
+    //    playerCombat.LightAttack();
+    //}
 
-    void HeavyAttack()
-    {
-        Debug.Log("Heavy Attack!");
-        playerCombat.HeavyAttack();
-    }
+    //void HeavyAttack()
+    //{
+    //    Debug.Log("Heavy Attack!");
+    //    //playerCombat.HeavyAttack();
+    //}
 }

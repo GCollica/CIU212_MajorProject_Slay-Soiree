@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerInputMap",
     "maps": [
         {
             "name": "UI",
@@ -542,6 +542,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Active Item",
+                    "type": "Button",
+                    "id": "58010beb-b14d-4148-8083-a1973b6ca443",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -681,7 +689,7 @@
                     "name": "",
                     "id": "58a0e31f-d44f-4545-9062-da0a1dd8f11b",
                     "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Light Attack",
@@ -703,7 +711,7 @@
                     "name": "",
                     "id": "dd466af1-c5ff-4ebe-a2a6-697dfa0e9564",
                     "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": " Interact",
@@ -718,6 +726,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": " Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b9f3bdf-2955-493b-a406-1ebd602e3ddd",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Active Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

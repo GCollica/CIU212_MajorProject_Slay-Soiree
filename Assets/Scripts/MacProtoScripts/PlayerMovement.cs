@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     //Acceleration rat
     public float forceMult;
 
+    private Vector2 m;
+
     private Rigidbody2D rb;
 
     void Awake()
@@ -51,11 +53,13 @@ public class PlayerMovement : MonoBehaviour
 
     void TurnPlayer()
     {
+        // Player moves left, flip character left
         if (move.x <= -0.1)
         {
             gameObject.transform.localScale = left;
         }
 
+        // Player moves right, flip character right
         if (move.x >= 0.1)
         {
             gameObject.transform.localScale = right;
@@ -65,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         //Assigns "m" to the Vector2 value of the left joystick axes
-        Vector2 m = new Vector2(move.x, move.y);
+        m = new Vector2(move.x, move.y);
 
         //Sets the velocity to accelerate to
         targetVelocity = m * ((baseSpeed + playerSpeed) * 100) * Time.fixedDeltaTime;
@@ -87,6 +91,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move(Vector2 direction)
     {
-        //Debug.Log("Moving!" + direction);
+        Debug.Log("Moving!" + direction);
     }
 }

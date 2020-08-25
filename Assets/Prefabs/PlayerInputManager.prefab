@@ -99,11 +99,33 @@ MonoBehaviour:
     m_ActionId: 713735b0-25f1-439c-a489-0aad9cd3c26d
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6552467706717844422}
+        m_MethodName: LightAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 5f4473e0-378f-4c17-984a-85b98d91dc86
     m_ActionName: Player/Light Attack[/DualShock4GamepadHID/buttonWest,/DualShock4GamepadHID/buttonWest]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6552467706717844422}
+        m_MethodName: HeavyAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b851b2fd-15c9-4f97-a615-4c2c41af8099
     m_ActionName: Player/Heavy Attack[/DualShock4GamepadHID/buttonWest,/DualShock4GamepadHID/buttonWest]
   - m_PersistentCalls:
@@ -122,9 +144,35 @@ MonoBehaviour:
     m_ActionId: ea7755c2-68f5-46e1-a5ab-bf416082c01b
     m_ActionName: Player/Movement[/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/leftStick/right,/DualShock4GamepadHID/leftStick/right]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6552467706717844422}
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f7705655-97ef-4336-8f8b-85aa36aa351b
     m_ActionName: Player/ Interact[/DualShock4GamepadHID/buttonSouth,/DualShock4GamepadHID/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6552467706717844422}
+        m_MethodName: ActiveItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 58010beb-b14d-4148-8083-a1973b6ca443
+    m_ActionName: Player/New action[/DualShock4GamepadHID/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -142,3 +190,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4725a69d8202cb4a85a856ed7e1ab8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attacking: 1

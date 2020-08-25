@@ -555,6 +555,14 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Active Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""58010beb-b14d-4148-8083-a1973b6ca443"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -694,7 +702,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""58a0e31f-d44f-4545-9062-da0a1dd8f11b"",
                     ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Light Attack"",
@@ -716,7 +724,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""dd466af1-c5ff-4ebe-a2a6-697dfa0e9564"",
                     ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": "" Interact"",
@@ -731,6 +739,17 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": "" Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b9f3bdf-2955-493b-a406-1ebd602e3ddd"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Active Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -818,6 +837,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
         m_Player_HeavyAttack = m_Player.FindAction("Heavy Attack", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction(" Interact", throwIfNotFound: true);
+        m_Player_ActiveItem = m_Player.FindAction("Active Item", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -976,6 +996,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_ActiveItem;
     public struct PlayerActions
     {
         private @PlayerInputMap m_Wrapper;
@@ -984,6 +1005,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @ActiveItem => m_Wrapper.m_Player_ActiveItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1005,6 +1027,9 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @ActiveItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveItem;
+                @ActiveItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveItem;
+                @ActiveItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1021,6 +1046,9 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ActiveItem.started += instance.OnActiveItem;
+                @ActiveItem.performed += instance.OnActiveItem;
+                @ActiveItem.canceled += instance.OnActiveItem;
             }
         }
     }
@@ -1089,5 +1117,6 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnActiveItem(InputAction.CallbackContext context);
     }
 }
