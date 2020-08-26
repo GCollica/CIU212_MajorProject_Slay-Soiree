@@ -7,7 +7,7 @@ using Pathfinding;
 public class BasicEnemy1_AI : MonoBehaviour
 {
     //Data references for state machine components of the code.
-    public enum AIState {Idle, FindingTarget, PursuingTarget, AttackingTarget};
+    public enum AIState {Idle, FindingTarget, PursuingTarget, AttackSequence, ExecutingAttacks};
     public AIState currentAIState = AIState.Idle;
 
     //Data references for multi-use components of the code.
@@ -32,7 +32,7 @@ public class BasicEnemy1_AI : MonoBehaviour
     private float updatePathTimer = 0f;
     private float updatePathInterval = .25f;
 
-    //Data references for attacking compoonents of the code.
+    //Data references for attacking components of the code.
     private GameObject attackParent;
 
     private Transform attackPos1;
@@ -45,9 +45,14 @@ public class BasicEnemy1_AI : MonoBehaviour
     public RaycastHit2D[] raycastHits;
 
     private bool inAttackRange = false;
+    private bool isAtacking = false;
+    private bool attackCoolingDown = false;
 
     private float attackSequenceTimer = 0f;
-    private float attackSequenceInterval = .3f;
+    private float attackSequenceDuration = 1f;
+
+    public float attackCoolDownTimer = 0f;
+    public float attackCoolDownDuration = 3f;
     void Awake()
     {
         rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
@@ -66,6 +71,8 @@ public class BasicEnemy1_AI : MonoBehaviour
             case AIState.Idle:
                 
                 ClearPath();
+                RunAttackCooldownTimer();
+
                 if(idleDelayTimer < idleDelayLength)
                 {
                     idleDelayTimer += Time.deltaTime;
@@ -81,6 +88,7 @@ public class BasicEnemy1_AI : MonoBehaviour
                 idleDelayTimer = 0f;
                 InitialiseTargets();
                 FindNearestTarget();
+                RunAttackCooldownTimer();
                 currentAIState = AIState.PursuingTarget;
                 break;
 
@@ -88,57 +96,56 @@ public class BasicEnemy1_AI : MonoBehaviour
 
                 SetFacingDirection();
                 PursureTarget();
-                //TargetRangeCheck();
+                RunAttackCooldownTimer();
                 if(inAttackRange == true)
                 {
-                    currentAIState = AIState.AttackingTarget;
+                    currentAIState = AIState.AttackSequence;
                 }
                 break;
 
-            case AIState.AttackingTarget:
-                
-                attackSequenceTimer += Time.deltaTime;
-                SetAttackDirection();
+            case AIState.AttackSequence:
+
+                isAtacking = true;
+                RunAttackCooldownTimer();
+
                 if (inAttackRange == false)
                 {
                     currentAIState = AIState.FindingTarget;
                 }
 
-                if (attackSequenceTimer < attackSequenceInterval)
+                if(inAttackRange == true && attackCoolingDown == false)
                 {
-                    AttackRaycast(1);
-                    if (inAttackRange == false)
+                    SetAttackDirection();
+                    attackSequenceTimer += Time.deltaTime;
+
+                    if (attackSequenceTimer < attackSequenceDuration)
                     {
-                        currentAIState = AIState.FindingTarget;
+                        AttackRaycast(2);
+                        currentAIState = AIState.ExecutingAttacks;
                     }
                 }
-                if(attackSequenceTimer > attackSequenceInterval && attackSequenceTimer < (attackSequenceInterval * 2))
-                {
-                    AttackRaycast(2);
-                    if (inAttackRange == false)
-                    {
-                        currentAIState = AIState.FindingTarget;
-                    }
-                }
-                if(attackSequenceTimer > (attackSequenceInterval * 2) && attackSequenceTimer < (attackSequenceInterval * 3))
-                {
-                    AttackRaycast(3);
-                    if (inAttackRange == false)
-                    {
-                        currentAIState = AIState.FindingTarget;
-                    }
-                }
-                if(attackSequenceTimer > (attackSequenceInterval * 3))
+                break;
+
+            case AIState.ExecutingAttacks:
+                
+                if(isAtacking == true)
                 {
                     ExecuteAttacks();
+                    attackTargets.Clear();
                     attackSequenceTimer = 0f;
-                    //TargetRangeCheck();
-                    if(inAttackRange == false)
-                    {
-                        currentAIState = AIState.FindingTarget;
-                    }
+                    attackCoolDownTimer = 0f;
+                    attackCoolingDown = true;
+                    isAtacking = false;
                 }
 
+                if (inAttackRange == false)
+                {
+                    currentAIState = AIState.FindingTarget;
+                }
+                else
+                {
+                    currentAIState = AIState.AttackSequence;
+                }
                 break;
 
             default:
@@ -365,15 +372,30 @@ public class BasicEnemy1_AI : MonoBehaviour
         if(attackTargets != null)
         {
             if (attackTargets.Count > 0)
-            {
+            {                
                 foreach (GameObject target in attackTargets)
                 {
                     Debug.Log("Executed attack on " + target.name);
                     //Perform Attacks.
-                    attackTargets.Remove(target);
+                    //attackTargets.Remove(target);
                 }
             }
         }      
+    }
+
+    private void RunAttackCooldownTimer()
+    {
+        if(attackCoolingDown == true)
+        {
+            if(attackCoolDownTimer < attackCoolDownDuration)
+            {
+                attackCoolDownTimer += Time.deltaTime;
+            }
+            if(attackCoolDownTimer >= attackCoolDownDuration)
+            {
+                attackCoolingDown = false;
+            }
+        }
     }
 
     //Basic check for whether the enemy is within attack range of the current target.
