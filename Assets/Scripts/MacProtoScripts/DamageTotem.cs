@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DamageTotem : MonoBehaviour
 {
-    List<GameObject> enemies;
-
     public float damageMultiplyer;
 
     private float startingDamage;
