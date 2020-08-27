@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Starting speed for player
     [SerializeField]
-    private float baseSpeed;
+    private float baseSpeed = 3;
 
     //Speed stat that changes with items
     public float playerSpeed;

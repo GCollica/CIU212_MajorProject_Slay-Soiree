@@ -21,24 +21,7 @@ public class BasicEnemy1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-         //Testing Take Damage Function from basicEnemyClass.
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Debug.Log(this.gameObject.name + basicEnemyClass.damage);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Debug.Log(this.gameObject.name + basicEnemyClass.health);
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            basicEnemyClass.TakeDamage(basicEnemyClass.damage);
-        }
-        
+                
     }
 
     //Initialises an instance of the Basic Enemy Class, feeding it values for damage, resistance, health, movespeed as the constructor requires.
