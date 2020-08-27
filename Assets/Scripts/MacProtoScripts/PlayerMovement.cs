@@ -4,28 +4,93 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    #region Player Stats
-    private float playerSpeed; 
-    #endregion
+    private Vector2 left, right;
 
 
-    //Player Movement Speed
-    public float basemoveSpeed;
 
-    public Rigidbody2D rb;
+    [SerializeField]
+    private int playerIndex = 0;
 
-    Vector2 movement;
+    //Starting speed for player
+    [SerializeField]
+    private float baseSpeed = 3;
+
+    //Speed stat that changes with items
+    public float playerSpeed;
+
+    //Unity auto-generated input script
+    private PlayerInputMap controls;
+
+    //For calculating movement for character
+    Vector2 move;
+    private Vector2 targetVelocity;
+    //Acceleration rat
+    public float forceMult;
+
+    private Vector2 m;
+
+    private Rigidbody2D rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        controls = new PlayerInputMap();
+
+        left = new Vector2(0.60343f, 0.60343f);
+        right = new Vector2(-0.60343f, 0.60343f);
+    }
+
+    public void SetInputVector(Vector2 direction)
+    {
+        //Sets the Vector2 value taken from the PlayerInputHandler script
+        move = direction;
+    }
 
     void Update()
     {
-        //Sets horizontal movement on the y axis and vertical movement 
-        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        TurnPlayer();
+    }
 
-        //if(Input.GetButtonDown)
+    void TurnPlayer()
+    {
+        // Player moves left, flip character left
+        if (move.x <= -0.1)
+        {
+            gameObject.transform.localScale = left;
+        }
+
+        // Player moves right, flip character right
+        if (move.x >= 0.1)
+        {
+            gameObject.transform.localScale = right;
+        }
     }
 
     void FixedUpdate()
     {
-        rb.velocity = movement * ((basemoveSpeed + playerSpeed) * 100) * Time.fixedDeltaTime;
+        //Assigns "m" to the Vector2 value of the left joystick axes
+        m = new Vector2(move.x, move.y);
+
+        //Sets the velocity to accelerate to
+        targetVelocity = m * ((baseSpeed + playerSpeed) * 100) * Time.fixedDeltaTime;
+
+        //Calculates the amount of force delivered each frame
+        Vector2 force = (targetVelocity - rb.velocity) * forceMult;
+
+        //Moves player forwards
+        rb.AddForce(force);
+
+        Move(m);
+    }
+
+    public int GetPlayerIndex()
+    {
+        //Returns the index of the player (Index 0-3/Player 1-4) 
+        return playerIndex;
+    }
+
+    void Move(Vector2 direction)
+    {
+        Debug.Log("Moving!" + direction);
     }
 }
