@@ -2,12 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuirkManager : MonoBehaviour
+public class Quirks : ScriptableObject
 {
-    public GameObject[] Quirks;
+    #region DamageTotem
+    public float damageMultiplyer;
+
+    private float startingDamage;
+    private float increasedDamage;
+
+    public GameObject totem;
+
+    private BasicEnemy1 enemy;
+
+    public float health;
 
     void Awake()
     {
-        Instantiate(Quirks[0], transform);
+        enemy = FindObjectOfType<BasicEnemy1>();
+
+        startingDamage = enemy.damage;
+        increasedDamage = enemy.damage * damageMultiplyer;
     }
+
+    void Start()
+    {
+        enemy.damage = increasedDamage;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health = health -= damage;
+
+        if (health <= 0)
+        {
+            enemy.damage = startingDamage;
+            Destroy(totem);
+        }
+    }
+    #endregion
 }

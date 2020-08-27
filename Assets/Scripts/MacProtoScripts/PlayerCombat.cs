@@ -68,8 +68,16 @@ public class PlayerCombat : MonoBehaviour
             var impactEnemy = enemy.GetComponent<BasicEnemy1>();
             var impactTotem = enemy.GetComponent<DamageTotem>();
 
-            impactEnemy.TakeDamage(heavyAttackDamage);
-            impactTotem.TakeDamage(heavyAttackDamage);
+            if (impactEnemy != null)
+            {
+                impactEnemy.TakeDamage(heavyAttackDamage);
+                continue;
+            }
+            else if (impactTotem != null)
+            {
+                impactTotem.TakeDamage(heavyAttackDamage);
+                continue;
+            }
         }
     }
 
