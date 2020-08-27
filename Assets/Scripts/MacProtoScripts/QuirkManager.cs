@@ -6,7 +6,6 @@ public class QuirkManager : MonoBehaviour
 {
     public GameObject[] Quirks;
 
-
     void Awake()
     {
         Instantiate(Quirks[0], transform);
