@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector2 left, right;
 
-
+    private Animator animator;
 
     [SerializeField]
     private int playerIndex = 0;
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         controls = new PlayerInputMap();
 
@@ -49,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         TurnPlayer();
+
+        animator.SetFloat("Speed", m.sqrMagnitude);
     }
 
     void TurnPlayer()
