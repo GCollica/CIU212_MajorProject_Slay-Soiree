@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class QuirkManager : MonoBehaviour
 {
-    List<GameObject> enemies;
+    public List<GameObject> Quirks;
+
+    //public GameObject totem;
+
+    void Start()
+    {
+
+    }
 
     #region DamageTotem
-    
+    void DamageTotem()
+    {
+        Instantiate(Quirks.Find(obj => obj.name == "DamageTotem"), transform);
+    }
     #endregion
 }

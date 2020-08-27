@@ -6,8 +6,7 @@ public class DamageTotem : MonoBehaviour
 {
     public float damageMultiplyer;
 
-    private float startingDamage;
-    private float increasedDamage;
+    // Reference to player stats
 
     private BasicEnemy1 enemy;
 
@@ -15,15 +14,8 @@ public class DamageTotem : MonoBehaviour
 
     void Awake()
     {
-        enemy = FindObjectOfType<BasicEnemy1>();
+        // Toggle bool true for damage multiplayer
 
-        startingDamage = enemy.damage;
-        increasedDamage = enemy.damage * damageMultiplyer;  
-    }
-
-    void Start()
-    {
-        enemy.damage = increasedDamage;
     }
 
     public void TakeDamage(float damage)
@@ -32,7 +24,7 @@ public class DamageTotem : MonoBehaviour
 
         if (health <= 0)
         {
-            enemy.damage = startingDamage;
+            // Toggle bool false
 
             Destroy(gameObject);
         }

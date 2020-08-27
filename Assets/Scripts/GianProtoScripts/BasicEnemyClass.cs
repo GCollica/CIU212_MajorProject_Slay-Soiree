@@ -26,5 +26,4 @@ public class BasicEnemyClass
         //Debug.Log(resCalculated);
         health -= resCalculated;
     }
-
 }
