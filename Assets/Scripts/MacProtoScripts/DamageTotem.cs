@@ -17,13 +17,13 @@ public class DamageTotem : MonoBehaviour
     {
         enemy = FindObjectOfType<BasicEnemy1>();
 
-        startingDamage = enemy.damage;
-        increasedDamage = enemy.damage * damageMultiplyer;  
+        startingDamage = enemy.staringDamage;
+        increasedDamage = enemy.staringDamage * damageMultiplyer;  
     }
 
     void Start()
     {
-        enemy.damage = increasedDamage;
+        enemy.staringDamage = increasedDamage;
     }
 
     public void TakeDamage(float damage)
@@ -32,7 +32,7 @@ public class DamageTotem : MonoBehaviour
 
         if (health <= 0)
         {
-            enemy.damage = startingDamage;
+            enemy.staringDamage = startingDamage;
 
             Destroy(gameObject);
         }

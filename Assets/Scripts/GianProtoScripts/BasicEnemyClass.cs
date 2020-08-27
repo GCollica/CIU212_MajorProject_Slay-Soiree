@@ -22,7 +22,7 @@ public class BasicEnemyClass
     //Calculates the damage taken given an input value against the resistance of the enemy. Then updates current health to accomodate. 
     public void TakeDamage(float incomingDamage)
     {
-        float resCalculated = (incomingDamage * (1 - (resistance / 100f)));
+        float resCalculated = incomingDamage * (1 - (resistance / 100f));
         //Debug.Log(resCalculated);
         health -= resCalculated;
     }
