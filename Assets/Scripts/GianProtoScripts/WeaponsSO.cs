@@ -9,7 +9,8 @@ public class WeaponsSO : ScriptableObject
 
     public Sprite weaponSprite;
 
-    public int damage;
+    public int lightDamage;
+    public int heavyDamage;
     public float attackSpeed;
     public float attackRange;
     public int cost;

@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         controls = new PlayerInputMap();
 

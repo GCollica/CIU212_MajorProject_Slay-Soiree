@@ -6,12 +6,13 @@ public class BasicEnemy1 : MonoBehaviour
 {
     /*Script that will be attached to each basic enemy 1 gameobject throughout the game. Holds individual values for damage, resistance, health & movement speed and feeds that into it's own instance of the BasicEnemyClass. */
 
-    public float staringDamage;
-    public float startingResistance;
-    public float startingHealth;
-    public float startingMovespeed;
+    public BasicEnemyClass basicEnemyClass;
 
-    private BasicEnemyClass basicEnemyClass;
+    public float startingDamage = 5f;
+    public float startingResistance = 10f;
+    public float startingHealth = 25f;
+    public float startingMovespeed = 10f;
+    public int goldDrop = 2;
     
     void Awake()
     {
@@ -27,25 +28,33 @@ public class BasicEnemy1 : MonoBehaviour
     //Initialises an instance of the Basic Enemy Class, feeding it values for damage, resistance, health, movespeed as the constructor requires.
     private void InitialiseClassInstance()
     {
-        basicEnemyClass = new BasicEnemyClass(staringDamage, startingResistance, startingHealth, startingMovespeed);
+        basicEnemyClass = new BasicEnemyClass(startingDamage, startingResistance, startingHealth, startingMovespeed, goldDrop);
     }
 
-    public void TakeDamage(float playerDamage)
+    public void TakeDamage(GameObject player, string attackType)
     {
-        basicEnemyClass.TakeDamage(playerDamage);
+        if(attackType == "Heavy")
+        {
+            basicEnemyClass.TakeCalculatedDamage(player.GetComponent<PlayerClass>().currentHeavyDamage);
+        }
+        else if (attackType == "Light")
+        {
+            basicEnemyClass.TakeCalculatedDamage(player.GetComponent<PlayerClass>().currentLightDamage);
+        }
 
         // If enemy health drops below zero
-        if (basicEnemyClass.health <= 0)
+        if (basicEnemyClass.currentHealth <= 0)
         {
             // Death animation here.
 
             // Invoke death for animation duration or call it when animation finishes
-            EnemyDead();
+            EnemyDead(player);
         }
     }
 
-    void EnemyDead()
+    void EnemyDead(GameObject rewardPlayer)
     {
+        rewardPlayer.GetComponent<PlayerClass>().GainGold(basicEnemyClass.currentGoldDrop);
         // Destroy Gameobject
         Destroy(gameObject);
     }

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shortsword
   weaponSprite: {fileID: 21300000, guid: ade4d980973c65745bd87cc70768cd95, type: 3}
-  damage: 3
+  lightDamage: 0
+  heavyDamage: 0
   attackSpeed: 5
-  attackRange: 0.75
+  attackRange: 0.5
   cost: 20

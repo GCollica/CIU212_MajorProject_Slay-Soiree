@@ -6,6 +6,8 @@ using Pathfinding;
 
 public class BasicEnemy1_AI : MonoBehaviour
 {
+    private BasicEnemy1 basicEnemy1Script;
+
     //Data references for state machine components of the code.
     public enum AIState {Idle, FindingTarget, PursuingTarget, AttackSequence, ExecutingAttacks};
     public AIState currentAIState = AIState.Idle;
@@ -27,7 +29,7 @@ public class BasicEnemy1_AI : MonoBehaviour
 
     private int currentWaypoint = 0;
 
-    public float movementSpeed = 10f;
+    //public float movementSpeed = 10f;
     private float nextWaypointDistance = 3f;
     private float updatePathTimer = 0f;
     private float updatePathInterval = .25f;
@@ -57,6 +59,7 @@ public class BasicEnemy1_AI : MonoBehaviour
     {
         rigidBody = this.gameObject.GetComponent<Rigidbody2D>();
         seeker = this.gameObject.GetComponent<Seeker>();
+        basicEnemy1Script = this.gameObject.GetComponent<BasicEnemy1>();
         attackParent = FindChildGameObject(this.gameObject, "Attack_Direction");
         attackPos1 = FindChildGameObject(attackParent, "Attack_Pos1").transform;
         attackPos2 = FindChildGameObject(attackParent, "Attack_Pos2").transform;
@@ -214,7 +217,7 @@ public class BasicEnemy1_AI : MonoBehaviour
         }
 
         Vector2 directionVector = ((Vector2)currentPath.vectorPath[currentWaypoint] - rigidBody.position).normalized;
-        Vector2 force = directionVector * movementSpeed * Time.deltaTime;
+        Vector2 force = directionVector * basicEnemy1Script.basicEnemyClass.currentMovementSpeed * Time.deltaTime;
 
         rigidBody.AddForce(force);
 
@@ -376,6 +379,7 @@ public class BasicEnemy1_AI : MonoBehaviour
                 foreach (GameObject target in attackTargets)
                 {
                     Debug.Log("Executed attack on " + target.name);
+                    target.GetComponent<PlayerStats>().TakeDamage(basicEnemy1Script.basicEnemyClass.currentDamage);
                     //Perform Attacks.
                     //attackTargets.Remove(target);
                 }

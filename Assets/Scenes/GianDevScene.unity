@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAIState: 0
-  movementSpeed: 200
   attackTargets: []
   attackCoolDownTimer: 0
   attackCoolDownDuration: 3
@@ -282,10 +281,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ecee9418daa9d459f09f429636f4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  resistance: 5
-  health: 10
-  movementSpeed: 25
+  basicEnemyClass:
+    currentDamage: 0
+    currentResistance: 0
+    currentHealth: 0
+    currentMovementSpeed: 0
+    currentGoldDrop: 0
+  startingDamage: 5
+  startingResistance: 10
+  startingHealth: 25
+  startingMovespeed: 100
+  goldDrop: 2
 --- !u!1 &84558288
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,10 +358,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ecee9418daa9d459f09f429636f4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  resistance: 5
-  health: 10
-  movementSpeed: 25
+  basicEnemyClass:
+    currentDamage: 0
+    currentResistance: 0
+    currentHealth: 0
+    currentMovementSpeed: 0
+    currentGoldDrop: 0
+  startingDamage: 5
+  startingResistance: 10
+  startingHealth: 25
+  startingMovespeed: 100
+  goldDrop: 2
 --- !u!4 &89924353
 Transform:
   m_ObjectHideFlags: 0
@@ -406,7 +419,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAIState: 0
-  movementSpeed: 200
   attackTargets: []
   attackCoolDownTimer: 0
   attackCoolDownDuration: 3
@@ -654,12 +666,12 @@ PrefabInstance:
     - target: {fileID: 1221503274140661998, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.5
+      value: 5.48
       objectReference: {fileID: 0}
     - target: {fileID: 1221503274140661998, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.38
+      value: -2.86
       objectReference: {fileID: 0}
     - target: {fileID: 1221503274140661998, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}
@@ -739,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 4961674363769617903, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.53
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 8493846973349387341, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}

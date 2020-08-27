@@ -6,15 +6,21 @@ public class PlayerCombat : MonoBehaviour
 {
 
     private PlayerMovement playerMovement;
+    private PlayerStats playerStats;
 
     private int playerIndex = 0;
 
     public Transform attackPoint;
     public LayerMask enemyLayers;
 
-    public float attackRange = 0.5f;
-    public float lightAttackDamage = 3f;
-    public float heavyAttackDamage = 5f;
+    //public float attackRange = 0.5f;
+    //public float lightAttackDamage = 3f;
+    //public float heavyAttackDamage = 5f;
+
+    private void Awake()
+    {
+        playerStats = GetComponent<PlayerStats>();
+    }
 
     void FixedUpdate()
     {
@@ -28,7 +34,7 @@ public class PlayerCombat : MonoBehaviour
         // Play attack animation
 
         // Detect enemies in range of attack
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
 
         // Damage them
         foreach (Collider2D enemy in hitEnemies)
@@ -40,12 +46,12 @@ public class PlayerCombat : MonoBehaviour
 
             if (impactEnemy != null)
             {
-                impactEnemy.TakeDamage(lightAttackDamage);
+                impactEnemy.TakeDamage(this.gameObject, "Light");
                 continue;
             }
             else if (impactTotem != null)
             {
-                impactTotem.TakeDamage(lightAttackDamage);
+                impactTotem.TakeDamage(playerStats.playerClass.currentLightDamage);
                 continue;
             }
         }
@@ -58,7 +64,7 @@ public class PlayerCombat : MonoBehaviour
         // Play attack animation
 
         // Detect enemies in range of attack
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
 
         // Interactions for each enemy hit by the attack
         foreach (Collider2D enemy in hitEnemies)
@@ -70,12 +76,12 @@ public class PlayerCombat : MonoBehaviour
 
             if (impactEnemy != null)
             {
-                impactEnemy.TakeDamage(heavyAttackDamage);
+                impactEnemy.TakeDamage(this.gameObject, "Heavy");
                 continue;
             }
             else if (impactTotem != null)
             {
-                impactTotem.TakeDamage(heavyAttackDamage);
+                impactTotem.TakeDamage(playerStats.playerClass.currentHeavyDamage);
                 continue;
             }
         }
@@ -97,11 +103,12 @@ public class PlayerCombat : MonoBehaviour
         return playerIndex;
     }
 
+    /*
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
             return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
+        Gizmos.DrawWireSphere(attackPoint.position, playerStats.playerClass.currentAttackRange);
+    }*/
 }
