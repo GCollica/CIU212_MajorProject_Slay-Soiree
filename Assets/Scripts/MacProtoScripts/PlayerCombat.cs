@@ -107,13 +107,12 @@ public class PlayerCombat : MonoBehaviour
         //Returns the index of the player (Index 0-3/Player 1-4) 
         return playerIndex;
     }
-
-    /*
+    
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, playerStats.playerClass.currentAttackRange);
-    }*/
+    }
 }
