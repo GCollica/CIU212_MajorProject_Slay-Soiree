@@ -39,5 +39,16 @@ public class PlayerClass
     {
         currentGold += goldInput;
     }
+    
+    public void UpdateWeaponStats()
+    {
+        currentLightDamage = currentWeapon.lightDamage;
+        currentHeavyDamage = currentWeapon.heavyDamage;
+    }
 
+    public void UpdateArmourStats()
+    {
+        currentResistance = currentArmour.resistance;
+        currentMovementSpeed = currentArmour.movementSpeed;
+    }
 }

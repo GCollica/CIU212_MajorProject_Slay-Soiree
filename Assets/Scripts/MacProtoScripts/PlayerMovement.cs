@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         //Moves player forwards
         rb.AddForce(force);
 
-        Move(m);
+        //Move(m);
     }
 
     public int GetPlayerIndex()

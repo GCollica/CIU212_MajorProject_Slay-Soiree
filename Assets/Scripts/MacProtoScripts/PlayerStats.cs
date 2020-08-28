@@ -15,6 +15,9 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         InitialiseClassInstance();
+
+        playerClass.UpdateArmourStats();
+        playerClass.UpdateWeaponStats();
     }
 
     void Update()

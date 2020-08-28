@@ -5,26 +5,18 @@ using UnityEngine;
 public class DamageTotem : MonoBehaviour
 {
     public float damageMultiplyer;
-
-    private float startingDamage;
-    private float increasedDamage;
-
     private BasicEnemy1 enemy;
+
+    // Reference to player class script
 
     public float health; 
 
     void Awake()
     {
-        enemy = FindObjectOfType<BasicEnemy1>();
+        // Toggle damage increase true
 
-        startingDamage = enemy.startingDamage;
-        increasedDamage = enemy.startingDamage * damageMultiplyer;  
     }
 
-    void Start()
-    {
-        enemy.startingDamage = increasedDamage;
-    }
 
     public void TakeDamage(float damage)
     {
@@ -32,7 +24,7 @@ public class DamageTotem : MonoBehaviour
 
         if (health <= 0)
         {
-            enemy.startingDamage = startingDamage;
+            // Toggle damage increase false
 
             Destroy(gameObject);
         }

@@ -13,6 +13,8 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
 
+    private Animator animator;
+
     //public float attackRange = 0.5f;
     //public float lightAttackDamage = 3f;
     //public float heavyAttackDamage = 5f;
@@ -20,6 +22,7 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         playerStats = GetComponent<PlayerStats>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -32,6 +35,8 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log("Light Attack!");
 
         // Play attack animation
+        //animator.SetTrigger("Attacking");
+        animator.Play("Player_Sword_Attack");
 
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
@@ -46,7 +51,7 @@ public class PlayerCombat : MonoBehaviour
 
             if (impactEnemy != null)
             {
-                impactEnemy.TakeDamage(this.gameObject, "Light");
+                impactEnemy.TakeDamage(gameObject, "Light");
                 continue;
             }
             else if (impactTotem != null)
@@ -54,7 +59,7 @@ public class PlayerCombat : MonoBehaviour
                 impactTotem.TakeDamage(playerStats.playerClass.currentLightDamage);
                 continue;
             }
-        }
+        }    
     }
 
     public void HeavyAttack()

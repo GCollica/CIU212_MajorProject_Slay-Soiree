@@ -33,13 +33,15 @@ public class BasicEnemy1 : MonoBehaviour
 
     public void TakeDamage(GameObject player, string attackType)
     {
-        if(attackType == "Heavy")
+        Debug.Log("Calculating damage");
+
+        if (attackType == "Heavy")
         {
-            basicEnemyClass.TakeCalculatedDamage(player.GetComponent<PlayerClass>().currentHeavyDamage);
+            basicEnemyClass.TakeCalculatedDamage(player.GetComponent<PlayerStats>().playerClass.currentHeavyDamage);
         }
         else if (attackType == "Light")
         {
-            basicEnemyClass.TakeCalculatedDamage(player.GetComponent<PlayerClass>().currentLightDamage);
+            basicEnemyClass.TakeCalculatedDamage(player.GetComponent<PlayerStats>().playerClass.currentLightDamage);
         }
 
         // If enemy health drops below zero
@@ -54,7 +56,7 @@ public class BasicEnemy1 : MonoBehaviour
 
     void EnemyDead(GameObject rewardPlayer)
     {
-        rewardPlayer.GetComponent<PlayerClass>().GainGold(basicEnemyClass.currentGoldDrop);
+        rewardPlayer.GetComponent<PlayerStats>().playerClass.GainGold(basicEnemyClass.currentGoldDrop);
         // Destroy Gameobject
         Destroy(gameObject);
     }
