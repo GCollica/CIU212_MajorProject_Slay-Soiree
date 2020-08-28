@@ -31,7 +31,7 @@ public class PlayerClass
     public void TakeCalculatedDamage(float incomingDamage)
     {
         float resCalculated = incomingDamage * (1 - (currentResistance / 100f));
-        //Debug.Log(resCalculated);
+        Debug.Log(resCalculated);
         currentHealth -= resCalculated;
     }
 

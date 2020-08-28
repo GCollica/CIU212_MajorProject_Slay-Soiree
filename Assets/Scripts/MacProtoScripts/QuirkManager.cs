@@ -10,7 +10,7 @@ public class QuirkManager : MonoBehaviour
 
     void Start()
     {
-
+        DamageTotem();
     }
 
     #region DamageTotem

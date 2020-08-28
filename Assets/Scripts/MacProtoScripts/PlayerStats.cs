@@ -10,7 +10,19 @@ public class PlayerStats : MonoBehaviour
     public WeaponsSO startingWeapon;
     public ArmourSO startingArmour;
 
+    // For Death Totem Quirk damage increase
+    public bool damageTotem;
+    public float damageMultiplyer = 2f;
+
     public PlayerClass playerClass;
+    private PlayerCount playerCount;
+    private PlayerCombat playerCombat;
+
+    void Awake()
+    {
+        playerCount = FindObjectOfType<PlayerCount>();
+        playerCombat = FindObjectOfType<PlayerCombat>();
+    }
 
     void Start()
     {
@@ -32,11 +44,24 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float incomingDamage)
     {
-        playerClass.TakeCalculatedDamage(incomingDamage);
+        if (damageTotem)
+        {
+            playerClass.TakeCalculatedDamage(incomingDamage * damageMultiplyer);
+        }
+        else
+        {
+            playerClass.TakeCalculatedDamage(incomingDamage);
+        }
+           
 
         if(playerClass.currentHealth <= 0)
         {
-            //Kill player;
+            Debug.Log("Player " + playerCombat.playerIndex + " has died!");
+
+            // Kill player
+            playerCount.RemovePlayer(playerCount.players[playerCombat.playerIndex]);
+            playerCombat.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

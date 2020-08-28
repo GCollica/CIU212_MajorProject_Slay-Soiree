@@ -8,7 +8,8 @@ public class PlayerCombat : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerStats playerStats;
 
-    private int playerIndex = 0;
+    [HideInInspector]
+    public int playerIndex = 0;
 
     public Transform attackPoint;
     public LayerMask enemyLayers;
@@ -35,7 +36,6 @@ public class PlayerCombat : MonoBehaviour
         Debug.Log("Light Attack!");
 
         // Play attack animation
-        //animator.SetTrigger("Attacking");
         animator.Play("Player_Sword_Attack");
 
         // Detect enemies in range of attack
@@ -44,7 +44,7 @@ public class PlayerCombat : MonoBehaviour
         // Damage them
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("We hit" + enemy.name + "with a light attack!");
+            Debug.Log("We hit " + enemy.name + " with a light attack!");
 
             var impactEnemy = enemy.GetComponent<BasicEnemy1>();
             var impactTotem = enemy.GetComponent<DamageTotem>();
@@ -54,9 +54,11 @@ public class PlayerCombat : MonoBehaviour
                 impactEnemy.TakeDamage(gameObject, "Light");
                 continue;
             }
-            else if (impactTotem != null)
+
+            if (impactTotem != null)
             {
-                impactTotem.TakeDamage(playerStats.playerClass.currentLightDamage);
+                Debug.Log("Damage totem!");
+                impactTotem.TotemTakeDamage(playerStats.playerClass.currentLightDamage);
                 continue;
             }
         }    
@@ -81,12 +83,12 @@ public class PlayerCombat : MonoBehaviour
 
             if (impactEnemy != null)
             {
-                impactEnemy.TakeDamage(this.gameObject, "Heavy");
+                impactEnemy.TakeDamage(gameObject, "Heavy");
                 continue;
             }
             else if (impactTotem != null)
             {
-                impactTotem.TakeDamage(playerStats.playerClass.currentHeavyDamage);
+                impactTotem.TotemTakeDamage(playerStats.playerClass.currentHeavyDamage);
                 continue;
             }
         }

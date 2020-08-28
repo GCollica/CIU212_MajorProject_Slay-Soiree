@@ -17,5 +17,5 @@ MonoBehaviour:
   lightDamage: 3
   heavyDamage: 5
   attackSpeed: 5
-  attackRange: 0.5
+  attackRange: 1.35
   cost: 20

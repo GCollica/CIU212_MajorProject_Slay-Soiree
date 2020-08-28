@@ -11,14 +11,18 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerInputMap controls;
     private PlayerMovement playerMovement;
     private PlayerCombat playerCombat;
+    private PlayerCount playerCount;
 
     public bool attacking;
 
     void Awake()
     {
+        playerCount = FindObjectOfType<PlayerCount>();
         playerInput = GetComponent<PlayerInput>();
         playerCombat = FindObjectOfType<PlayerCombat>();
         controls = new PlayerInputMap();
+
+        playerCount.AddPlayer(gameObject);
 
         // Creates an array of PlayerMovement scripts for each player
         var playerControllers = FindObjectsOfType<PlayerMovement>();
@@ -31,6 +35,11 @@ public class PlayerInputHandler : MonoBehaviour
         playerMovement = playerControllers.FirstOrDefault(m => m.GetPlayerIndex() == index);
         playerCombat = playerCombats.FirstOrDefault(m => m.GetPlayerIndex() == index);
         Debug.Log(index);
+    }
+
+    void AddToPlayerList()
+    {
+        playerCount.AddPlayer(gameObject);
     }
 
     public void OnMove(CallbackContext movementContext)
