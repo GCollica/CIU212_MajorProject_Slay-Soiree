@@ -59,5 +59,7 @@ public class BasicEnemy1 : MonoBehaviour
         rewardPlayer.GetComponent<PlayerStats>().playerClass.GainGold(basicEnemyClass.currentGoldDrop);
         // Destroy Gameobject
         Destroy(gameObject);
+
+
     }
 }

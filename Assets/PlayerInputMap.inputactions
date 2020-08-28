@@ -550,6 +550,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Next Room",
+                    "type": "Button",
+                    "id": "df9062cf-b10a-41e7-8c27-93702c0721e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -737,6 +745,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Active Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebf5179f-e747-4fde-ba47-1ab242a00356",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Next Room",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

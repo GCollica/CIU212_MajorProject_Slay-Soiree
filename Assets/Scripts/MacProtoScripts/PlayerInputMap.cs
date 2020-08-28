@@ -563,6 +563,14 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Next Room"",
+                    ""type"": ""Button"",
+                    ""id"": ""df9062cf-b10a-41e7-8c27-93702c0721e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -752,6 +760,17 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                     ""action"": ""Active Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebf5179f-e747-4fde-ba47-1ab242a00356"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next Room"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -838,6 +857,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction(" Interact", throwIfNotFound: true);
         m_Player_ActiveItem = m_Player.FindAction("Active Item", throwIfNotFound: true);
+        m_Player_NextRoom = m_Player.FindAction("Next Room", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -997,6 +1017,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_ActiveItem;
+    private readonly InputAction m_Player_NextRoom;
     public struct PlayerActions
     {
         private @PlayerInputMap m_Wrapper;
@@ -1006,6 +1027,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @ActiveItem => m_Wrapper.m_Player_ActiveItem;
+        public InputAction @NextRoom => m_Wrapper.m_Player_NextRoom;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1030,6 +1052,9 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                 @ActiveItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveItem;
                 @ActiveItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveItem;
                 @ActiveItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActiveItem;
+                @NextRoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNextRoom;
+                @NextRoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNextRoom;
+                @NextRoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNextRoom;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1049,6 +1074,9 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                 @ActiveItem.started += instance.OnActiveItem;
                 @ActiveItem.performed += instance.OnActiveItem;
                 @ActiveItem.canceled += instance.OnActiveItem;
+                @NextRoom.started += instance.OnNextRoom;
+                @NextRoom.performed += instance.OnNextRoom;
+                @NextRoom.canceled += instance.OnNextRoom;
             }
         }
     }
@@ -1118,5 +1146,6 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnActiveItem(InputAction.CallbackContext context);
+        void OnNextRoom(InputAction.CallbackContext context);
     }
 }

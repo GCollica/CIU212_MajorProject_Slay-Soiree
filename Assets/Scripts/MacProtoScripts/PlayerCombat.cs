@@ -11,8 +11,14 @@ public class PlayerCombat : MonoBehaviour
     [HideInInspector]
     public int playerIndex = 0;
 
+    [SerializeField]
+    private float interactRange;
+    public GameObject interactPoint;
+
     public Transform attackPoint;
     public LayerMask enemyLayers;
+
+    public LayerMask interactableLayers;
 
     private Animator animator;
 
@@ -97,6 +103,22 @@ public class PlayerCombat : MonoBehaviour
     public void Interact()
     {
         Debug.Log("Interacted!");
+
+        // Detect enemies in range of attack
+        Collider2D[] hitInteractables = Physics2D.OverlapCircleAll(interactPoint.transform.position, interactRange, interactableLayers);
+
+        foreach (Collider2D interactable in hitInteractables)
+        {
+            Debug.Log("Interacted with " + interactable.name);
+
+            if (interactable.CompareTag("ItemPedistool"))
+            {
+                playerStats.UpdateCurrentItem(interactable);
+                Debug.Log("Item Changed");
+                continue;
+            }
+        }
+
     }
 
     public void ActiveItem()
@@ -116,5 +138,6 @@ public class PlayerCombat : MonoBehaviour
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, playerStats.playerClass.currentAttackRange);
+        Gizmos.DrawWireSphere(interactPoint.transform.position, interactRange);
     }
 }

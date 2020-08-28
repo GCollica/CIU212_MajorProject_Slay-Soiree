@@ -13,6 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerCombat playerCombat;
     private PlayerCount playerCount;
     private PlayerStats playerStats;
+    private SceneHandler sceneHandler;
 
     private float cooldownTime = 0.4f;
     private float nextAttackTime = 0f;
@@ -22,6 +23,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Awake()
     {
+        sceneHandler = FindObjectOfType<SceneHandler>();
         playerStats = FindObjectOfType<PlayerStats>();
         playerCount = FindObjectOfType<PlayerCount>();
         playerInput = GetComponent<PlayerInput>();
@@ -65,8 +67,6 @@ public class PlayerInputHandler : MonoBehaviour
         // Checks if the input has been pressed
         if (context.performed && playerMovement != null)
         {
-
-
             // If true then call Interact function
             playerCombat.Interact();
         }
@@ -103,6 +103,14 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.performed && playerMovement != null)
         {
             playerCombat.ActiveItem();
+        }
+    }
+
+    public void NextScene(CallbackContext context)
+    {
+        if (context.performed && playerMovement != null)
+        {
+            sceneHandler.ChangeScene();
         }
     }
 }
