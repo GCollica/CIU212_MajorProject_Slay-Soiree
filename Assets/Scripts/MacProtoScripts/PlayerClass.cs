@@ -51,4 +51,32 @@ public class PlayerClass
         currentResistance = currentArmour.resistance;
         currentMovementSpeed = currentArmour.movementSpeed;
     }
+
+    public void PurchaseNewWeapon(WeaponsSO newWeapon)
+    {
+        if(currentGold < newWeapon.cost)
+        {
+            return;
+        }
+        else
+        {
+            currentGold -= newWeapon.cost;
+            currentWeapon = newWeapon;
+            UpdateWeaponStats();
+        }      
+    }
+
+    public void PurchaseNewArmour(ArmourSO newArmour)
+    {
+        if(currentGold < newArmour.cost)
+        {
+            return;
+        }
+        else
+        {
+            currentGold -= newArmour.cost;
+            currentArmour = newArmour;
+            UpdateArmourStats();
+        }        
+    }
 }

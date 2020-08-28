@@ -64,4 +64,24 @@ public class PlayerStats : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    //Call this when interact is pressed to purchase weapon.
+    public void UpdateCurrentItem(Collider2D pedistoolCollider)
+    {
+        if(pedistoolCollider.gameObject.GetComponent<ItemPedistool>().currentItemType != ItemPedistool.ItemType.Empty)
+        {
+            if(pedistoolCollider.gameObject.GetComponent<ItemPedistool>().currentItemType == ItemPedistool.ItemType.Weapon)
+            {
+                playerClass.PurchaseNewWeapon(pedistoolCollider.gameObject.GetComponent<ItemPedistool>().currentWeaponItem);
+            }
+            else if(pedistoolCollider.gameObject.GetComponent<ItemPedistool>().currentItemType == ItemPedistool.ItemType.Armour)
+            {
+                playerClass.PurchaseNewArmour(pedistoolCollider.gameObject.GetComponent<ItemPedistool>().currentArmourItem);
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
 }
