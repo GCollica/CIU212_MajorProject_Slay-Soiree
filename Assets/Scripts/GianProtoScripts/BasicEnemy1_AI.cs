@@ -47,7 +47,7 @@ public class BasicEnemy1_AI : MonoBehaviour
     public RaycastHit2D[] raycastHits;
 
     private bool inAttackRange = false;
-    private bool isAtacking = false;
+    private bool isAttacking = false;
     private bool attackCoolingDown = false;
 
     private float attackSequenceTimer = 0f;
@@ -108,7 +108,7 @@ public class BasicEnemy1_AI : MonoBehaviour
 
             case AIState.AttackSequence:
 
-                isAtacking = true;
+                isAttacking = true;
                 RunAttackCooldownTimer();
 
                 if (inAttackRange == false)
@@ -131,14 +131,14 @@ public class BasicEnemy1_AI : MonoBehaviour
 
             case AIState.ExecutingAttacks:
                 
-                if(isAtacking == true)
+                if(isAttacking == true)
                 {
                     ExecuteAttacks();
                     attackTargets.Clear();
                     attackSequenceTimer = 0f;
                     attackCoolDownTimer = 0f;
                     attackCoolingDown = true;
-                    isAtacking = false;
+                    isAttacking = false;
                 }
 
                 if (inAttackRange == false)

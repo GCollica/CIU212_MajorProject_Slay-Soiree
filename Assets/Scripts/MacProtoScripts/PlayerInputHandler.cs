@@ -14,8 +14,9 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerCount playerCount;
     private PlayerStats playerStats;
 
-    private float cooldownTimer = 1;
-    private bool cooldown = false;
+    private float cooldownTime = 0.4f;
+    private float nextAttackTime = 0f;
+    private bool canAttack = true;
 
     public bool attacking;
 
@@ -71,17 +72,21 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void LightAttack(CallbackContext context)
-    {      
-        if (context.performed && playerMovement != null)
+    void FixedUpdate()
+    {
+        if(Time.time > nextAttackTime)
         {
-            if (!cooldown)
-            {
-                playerCombat.LightAttack();
-                cooldown = true;
-            }
+            nextAttackTime = Time.time + cooldownTime;
+            canAttack = true;
+        }
+    }
 
-
+    public void LightAttack(CallbackContext context)
+    {
+        if (context.performed && playerMovement != null && canAttack)
+        {
+            playerCombat.LightAttack();
+            canAttack = false;
         }
     }
 
@@ -89,8 +94,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.performed && playerMovement != null)
         {
-
-
             playerCombat.HeavyAttack();
         }
     }
