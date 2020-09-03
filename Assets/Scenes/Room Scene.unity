@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -794,6 +794,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7334487098724167515, guid: 2ab3b9d11d7daee48b5e0c0b803a5557,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334487098895791756, guid: 2ab3b9d11d7daee48b5e0c0b803a5557,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334487099526203681, guid: 2ab3b9d11d7daee48b5e0c0b803a5557,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7334487099684849209, guid: 2ab3b9d11d7daee48b5e0c0b803a5557,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -858,6 +873,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334487099823581943, guid: 2ab3b9d11d7daee48b5e0c0b803a5557,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab3b9d11d7daee48b5e0c0b803a5557, type: 3}

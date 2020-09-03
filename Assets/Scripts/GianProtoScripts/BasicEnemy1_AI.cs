@@ -428,8 +428,10 @@ public class BasicEnemy1_AI : MonoBehaviour
 
     public void Knockback()
     {
+        Debug.Log("Knockback");
+
         Vector2 directionVector = (targetTransform.position - this.gameObject.transform.position).normalized;
-        Vector2 force = -directionVector * 20f * Time.deltaTime;
+        Vector2 force = -directionVector * 50000f * Time.deltaTime;
         rigidBody.AddForce(force);
     }
 }
