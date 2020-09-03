@@ -425,4 +425,11 @@ public class BasicEnemy1_AI : MonoBehaviour
             }
         }
     }
+
+    public void Knockback()
+    {
+        Vector2 directionVector = (targetTransform.position - this.gameObject.transform.position).normalized;
+        Vector2 force = -directionVector * 20f * Time.deltaTime;
+        rigidBody.AddForce(force);
+    }
 }
