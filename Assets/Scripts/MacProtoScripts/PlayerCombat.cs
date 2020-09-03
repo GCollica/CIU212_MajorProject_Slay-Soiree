@@ -114,6 +114,7 @@ public class PlayerCombat : MonoBehaviour
             if (interactable.CompareTag("ItemPedistool"))
             {
                 playerStats.UpdateCurrentItem(interactable);
+                interactable.gameObject.GetComponent<ItemPedistool>().ClearPedistool();
                 Debug.Log("Item Changed");
                 continue;
             }

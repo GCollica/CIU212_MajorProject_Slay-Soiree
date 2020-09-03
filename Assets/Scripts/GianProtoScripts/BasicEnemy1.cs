@@ -16,18 +16,29 @@ public class BasicEnemy1 : MonoBehaviour
     
     void Awake()
     {
-        InitialiseClassInstance();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-              
+        if (gameObject.name == "BOSS")
+        {
+            InitaliseBossClassInstance();
+        }
+        else
+        {
+            InitialiseClassInstance();
+        }
     }
 
     //Initialises an instance of the Basic Enemy Class, feeding it values for damage, resistance, health, movespeed as the constructor requires.
     private void InitialiseClassInstance()
     {
+        basicEnemyClass = new BasicEnemyClass(startingDamage, startingResistance, startingHealth, startingMovespeed, goldDrop);
+    }
+
+    private void InitaliseBossClassInstance()
+    {
+        startingDamage = 25f;
+        startingResistance = 12f;
+        startingHealth = 125f;
+        startingMovespeed = 10f;
+
         basicEnemyClass = new BasicEnemyClass(startingDamage, startingResistance, startingHealth, startingMovespeed, goldDrop);
     }
 
