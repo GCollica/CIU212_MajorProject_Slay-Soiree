@@ -135,7 +135,7 @@ public class PlayerCombat : MonoBehaviour
     
     void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
+        if (attackPoint == null || interactPoint == null)
             return;
 
         Gizmos.DrawWireSphere(attackPoint.position, playerStats.playerClass.currentAttackRange);
