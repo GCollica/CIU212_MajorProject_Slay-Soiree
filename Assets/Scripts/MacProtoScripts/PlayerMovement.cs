@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerCombat playerCombat;
+
     private Vector2 left, right;
 
     private Animator animator;
@@ -37,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         controls = new PlayerInputMap();
 
-        left = new Vector2(0.60343f, 0.60343f);
-        right = new Vector2(-0.60343f, 0.60343f);
+        left = new Vector2(1f, 1f);
+        right = new Vector2(-1f, 1f);
     }
 
     public void SetInputVector(Vector2 direction)
@@ -88,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     public int GetPlayerIndex()
     {
-        //Returns the index of the player (Index 0-3/Player 1-4) 
+        //Returns the index of the player Index 0-3 (Player 1-4) 
         return playerIndex;
     }
 

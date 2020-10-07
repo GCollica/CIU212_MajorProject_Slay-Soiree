@@ -22,6 +22,14 @@ public class PlayerCombat : MonoBehaviour
 
     private Animator animator;
 
+    public GameObject crosshair;
+
+    [SerializeField]
+    private bool ranged;
+
+    public bool aiming;
+    private Vector2 crosshairPos;
+
     //public float attackRange = 0.5f;
     //public float lightAttackDamage = 3f;
     //public float heavyAttackDamage = 5f;
@@ -34,75 +42,94 @@ public class PlayerCombat : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (ranged)
+        {
+            Aim();
+        }
+
         //Vector2 looDir = playerMovement.m - gameObject.position;
     }
 
     public void LightAttack()
     {
-        Debug.Log("Light Attack!");
+        //Debug.Log("Light Attack!");
 
-        // Play attack animation
-        animator.Play("Player_Sword_Attack");
-
-        // Detect enemies in range of attack
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
-
-        // Damage them
-        foreach (Collider2D enemy in hitEnemies)
+        if (!ranged)
         {
-            Debug.Log("We hit " + enemy.name + " with a light attack!");
+            // Play attack animation
+            animator.Play("Player_Sword_Attack");
 
-            var impactEnemy = enemy.GetComponent<BasicEnemy1>();
-            var impactTotem = enemy.GetComponent<DamageTotem>();
+            // Detect enemies in range of attack
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
 
-            if (impactEnemy != null)
+            // Damage them
+            foreach (Collider2D enemy in hitEnemies)
             {
-                impactEnemy.TakeDamage(gameObject, "Light");
-                continue;
-            }
+                Debug.Log("We hit " + enemy.name + " with a light attack!");
 
-            if (impactTotem != null)
-            {
-                Debug.Log("Damage totem!");
-                impactTotem.TotemTakeDamage(playerStats.playerClass.currentLightDamage);
-                continue;
+                var impactEnemy = enemy.GetComponent<BasicEnemy1>();
+                var impactTotem = enemy.GetComponent<DamageTotem>();
+
+                if (impactEnemy != null)
+                {
+                    impactEnemy.TakeDamage(gameObject, "Light");
+                    continue;
+                }
+
+                if (impactTotem != null)
+                {
+                    Debug.Log("Damage totem!");
+                    impactTotem.TotemTakeDamage(playerStats.playerClass.currentLightDamage);
+                    continue;
+                }
             }
-        }    
+        }
+        else
+        {
+            return;
+        }       
     }
 
     public void HeavyAttack()
     {
-        Debug.Log("Heavy Attack!");
+        //Debug.Log("Heavy Attack!");
 
-        // Play attack animation
-
-        // Detect enemies in range of attack
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
-
-        // Interactions for each enemy hit by the attack
-        foreach (Collider2D enemy in hitEnemies)
+        if (!ranged)
         {
-            Debug.Log("We hit" + enemy.name + "with a heavy attack!");
+            // Play attack animation
 
-            var impactEnemy = enemy.GetComponent<BasicEnemy1>();
-            var impactTotem = enemy.GetComponent<DamageTotem>();
+            // Detect enemies in range of attack
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
 
-            if (impactEnemy != null)
+            // Interactions for each enemy hit by the attack
+            foreach (Collider2D enemy in hitEnemies)
             {
-                impactEnemy.TakeDamage(gameObject, "Heavy");
-                continue;
-            }
-            else if (impactTotem != null)
-            {
-                impactTotem.TotemTakeDamage(playerStats.playerClass.currentHeavyDamage);
-                continue;
+                Debug.Log("We hit" + enemy.name + "with a heavy attack!");
+
+                var impactEnemy = enemy.GetComponent<BasicEnemy1>();
+                var impactTotem = enemy.GetComponent<DamageTotem>();
+
+                if (impactEnemy != null)
+                {
+                    impactEnemy.TakeDamage(gameObject, "Heavy");
+                    continue;
+                }
+                else if (impactTotem != null)
+                {
+                    impactTotem.TotemTakeDamage(playerStats.playerClass.currentHeavyDamage);
+                    continue;
+                }
             }
         }
+        else
+        {
+            return;
+        }        
     }
 
     public void Interact()
     {
-        Debug.Log("Interacted!");
+        //Debug.Log("Interacted!");
 
         // Detect enemies in range of attack
         Collider2D[] hitInteractables = Physics2D.OverlapCircleAll(interactPoint.transform.position, interactRange, interactableLayers);
@@ -120,6 +147,30 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+    }
+
+    public void SetInputVectorAim(Vector2 direction)
+    {
+        crosshairPos = direction;
+    }
+
+    public void Aim()
+    {
+        if (aiming)
+        {
+            Debug.Log("Aiming");
+
+            crosshair.transform.localPosition = crosshairPos;
+        }
+        else
+        {
+            return;
+        }            
+    }
+
+    public void Fire()
+    {
+        //Shoot projectile
     }
 
     public void ActiveItem()
