@@ -56,8 +56,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             // Takes the input from object this script is attached to (PlayerInputController)
             playerMovement.SetInputVector(movementContext.ReadValue<Vector2>());
-
-            playerCombat.SetInputVectorAim(movementContext.ReadValue<Vector2>());
         }
     }
 
@@ -113,22 +111,6 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.performed && playerMovement != null)
         {
             sceneHandler.ChangeScene();
-        }
-    }
-
-    public void Aim(CallbackContext context)
-    {
-        if (context.performed && playerMovement != null)
-        {
-            playerCombat.aiming = true;
-        }
-    }
-
-    public void Fire(CallbackContext context)
-    {
-        if (context.performed && playerMovement != null)
-        {
-            playerCombat.Fire();
         }
     }
 }

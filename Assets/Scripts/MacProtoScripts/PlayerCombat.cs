@@ -40,91 +40,76 @@ public class PlayerCombat : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
+    void Start()
+    {
+        // Testing purposes only
+        ranged = true;
+    }
+
     void FixedUpdate()
     {
-        if (ranged)
-        {
-            Aim();
-        }
-
         //Vector2 looDir = playerMovement.m - gameObject.position;
     }
 
     public void LightAttack()
     {
         //Debug.Log("Light Attack!");
+        // Play attack animation
+        animator.Play("Player_Sword_Attack");
 
-        if (!ranged)
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
+
+        // Damage them
+        foreach (Collider2D enemy in hitEnemies)
         {
-            // Play attack animation
-            animator.Play("Player_Sword_Attack");
+            Debug.Log("We hit " + enemy.name + " with a light attack!");
 
-            // Detect enemies in range of attack
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
+            var impactEnemy = enemy.GetComponent<BasicEnemy1>();
+            var impactTotem = enemy.GetComponent<DamageTotem>();
 
-            // Damage them
-            foreach (Collider2D enemy in hitEnemies)
+            if (impactEnemy != null)
             {
-                Debug.Log("We hit " + enemy.name + " with a light attack!");
+                impactEnemy.TakeDamage(gameObject, "Light");
+                continue;
+            }
 
-                var impactEnemy = enemy.GetComponent<BasicEnemy1>();
-                var impactTotem = enemy.GetComponent<DamageTotem>();
-
-                if (impactEnemy != null)
-                {
-                    impactEnemy.TakeDamage(gameObject, "Light");
-                    continue;
-                }
-
-                if (impactTotem != null)
-                {
-                    Debug.Log("Damage totem!");
-                    impactTotem.TotemTakeDamage(playerStats.playerClass.currentLightDamage);
-                    continue;
-                }
+            if (impactTotem != null)
+            {
+                Debug.Log("Damage totem!");
+                impactTotem.TotemTakeDamage(playerStats.playerClass.currentLightDamage);
+                continue;
             }
         }
-        else
-        {
-            return;
-        }       
     }
 
     public void HeavyAttack()
     {
         //Debug.Log("Heavy Attack!");
+        // Play attack animation
 
-        if (!ranged)
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
+
+        // Interactions for each enemy hit by the attack
+        foreach (Collider2D enemy in hitEnemies)
         {
-            // Play attack animation
+            Debug.Log("We hit" + enemy.name + "with a heavy attack!");
 
-            // Detect enemies in range of attack
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
+            var impactEnemy = enemy.GetComponent<BasicEnemy1>();
+            var impactTotem = enemy.GetComponent<DamageTotem>();
 
-            // Interactions for each enemy hit by the attack
-            foreach (Collider2D enemy in hitEnemies)
+            if (impactEnemy != null)
             {
-                Debug.Log("We hit" + enemy.name + "with a heavy attack!");
-
-                var impactEnemy = enemy.GetComponent<BasicEnemy1>();
-                var impactTotem = enemy.GetComponent<DamageTotem>();
-
-                if (impactEnemy != null)
-                {
-                    impactEnemy.TakeDamage(gameObject, "Heavy");
-                    continue;
-                }
-                else if (impactTotem != null)
-                {
-                    impactTotem.TotemTakeDamage(playerStats.playerClass.currentHeavyDamage);
-                    continue;
-                }
+                impactEnemy.TakeDamage(gameObject, "Heavy");
+                continue;
             }
-        }
-        else
-        {
-            return;
-        }        
+            else if (impactTotem != null)
+            {
+                impactTotem.TotemTakeDamage(playerStats.playerClass.currentHeavyDamage);
+                continue;
+            }
+        }     
     }
 
     public void Interact()
@@ -149,30 +134,6 @@ public class PlayerCombat : MonoBehaviour
 
     }
 
-    public void SetInputVectorAim(Vector2 direction)
-    {
-        crosshairPos = direction;
-    }
-
-    public void Aim()
-    {
-        if (aiming)
-        {
-            Debug.Log("Aiming");
-
-            crosshair.transform.localPosition = crosshairPos;
-        }
-        else
-        {
-            return;
-        }            
-    }
-
-    public void Fire()
-    {
-        //Shoot projectile
-    }
-
     public void ActiveItem()
     {
         Debug.Log("Used active item!");
@@ -180,7 +141,7 @@ public class PlayerCombat : MonoBehaviour
 
     public int GetPlayerIndex()
     {
-        //Returns the index of the player (Index 0-3/Player 1-4) 
+        // Returns the index of the player (Index 0-3/Player 1-4) 
         return playerIndex;
     }
     

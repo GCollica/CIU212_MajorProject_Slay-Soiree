@@ -578,7 +578,7 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                     ""id"": ""2b9a27f4-f851-49b1-ac52-86d82b5a1bd8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Hold""
                 },
                 {
                     ""name"": ""Fire"",
