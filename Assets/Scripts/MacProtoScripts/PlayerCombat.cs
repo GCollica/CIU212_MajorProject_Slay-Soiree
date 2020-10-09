@@ -57,30 +57,33 @@ public class PlayerCombat : MonoBehaviour
         // Play attack animation
         animator.Play("Player_Sword_Attack");
 
-        // Detect enemies in range of attack
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
-
-        // Damage them
-        foreach (Collider2D enemy in hitEnemies)
+        if (!ranged)
         {
-            Debug.Log("We hit " + enemy.name + " with a light attack!");
+            // Detect enemies in range of attack
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerStats.playerClass.currentAttackRange, enemyLayers);
 
-            var impactEnemy = enemy.GetComponent<BasicEnemy1>();
-            var impactTotem = enemy.GetComponent<DamageTotem>();
-
-            if (impactEnemy != null)
+            // Damage them
+            foreach (Collider2D enemy in hitEnemies)
             {
-                impactEnemy.TakeDamage(gameObject, "Light");
-                continue;
-            }
+                Debug.Log("We hit " + enemy.name + " with a light attack!");
 
-            if (impactTotem != null)
-            {
-                Debug.Log("Damage totem!");
-                impactTotem.TotemTakeDamage(playerStats.playerClass.currentLightDamage);
-                continue;
+                var impactEnemy = enemy.GetComponent<BasicEnemy1>();
+                var impactTotem = enemy.GetComponent<DamageTotem>();
+
+                if (impactEnemy != null)
+                {
+                    impactEnemy.TakeDamage(gameObject, "Light");
+                    continue;
+                }
+
+                if (impactTotem != null)
+                {
+                    Debug.Log("Damage totem!");
+                    impactTotem.TotemTakeDamage(playerStats.playerClass.currentLightDamage);
+                    continue;
+                }
             }
-        }
+        }       
     }
 
     public void HeavyAttack()
