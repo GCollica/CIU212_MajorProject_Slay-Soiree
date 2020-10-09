@@ -735,6 +735,17 @@ public class @PlayerInputMap : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""5d9f43a8-5ff9-4a07-b78e-4fe729de75b8"",
+                    ""path"": ""<SwitchProControllerHID>/buttonNorth"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Light Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""9c40376c-ee22-40f6-b244-3f53a14400a5"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
