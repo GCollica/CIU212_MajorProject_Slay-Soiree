@@ -188,6 +188,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: df9062cf-b10a-41e7-8c27-93702c0721e3
     m_ActionName: Player/Next Room[/DualShock4GamepadHID/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2b9a27f4-f851-49b1-ac52-86d82b5a1bd8
+    m_ActionName: Player/Aim[/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37111cc7-5b7a-4db3-9382-241fadbcc309
+    m_ActionName: Player/Fire[/DualShock4GamepadHID/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
