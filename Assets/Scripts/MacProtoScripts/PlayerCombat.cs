@@ -43,7 +43,6 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         // Testing purposes only
-        ranged = true;
     }
 
     void FixedUpdate()
