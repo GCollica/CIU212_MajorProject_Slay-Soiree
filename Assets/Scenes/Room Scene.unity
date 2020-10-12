@@ -225,7 +225,7 @@ PrefabInstance:
     - target: {fileID: 3872625423791190525, guid: f5136916917dc8949b3caac1eabfe648,
         type: 3}
       propertyPath: data.dataString
-      value: UEsDBBQAAAgIAABAIewdKjrGfQIAACcFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMuSojAU/RUr68ECfICzm0HbnkU/qp2p3rCJ5CIpQ0IlodXu8t/nJqA4jgsM59znuTd8ES5NA4VVeq05e1IMyPcRcWfybTSQj3CkOyU3/BMuNu+c2coZUW/zRi1XiEfOzagarObFD7kTzjhEsJW8VLpesR1kyliDcEmFAaS0ss5bIvQ1Ikf8CxbO5YSnOHGnTzwtwtEZjwVIC3owTcfhZDKfL1ZBmPY+QTiOQ/+bpr1zkIyjcDaN42QVRDMfqJWFoHUDzHU1xIsn41kfJxl3lhJb7o1CTxZKCG76iok9NV6RjDamxX7RgHGKCvgyY3ytgO8q279cnV/K0oDt5dH0tOQaheyikp+qU7emZt8V90FF6/LMothX1QV9+o8PIk+XWtWPl7xR6HLYihf7N3oqqLE38t/Cy6HwyGt0oGJPtwLeK5DPaq1VKxmSVrfOtTUQL4fXa2tZBcV+wLtS78C2GUS/Tns8SadROp/McZzJZXbY0NlLccwEr7d+DNMO2Ajlxff7AhoH9Qur99tk+riIupL+GPhNd7dr1xMPXBuLVN+ydLVuVaudKVl5AV1rrc2UluDhvoMGJBX29Iph7P0877ibtHfMA3UXrE/ec5d7c+fi4cE+DO+oV3W4Ts5U6vAEpnppreAShqId8Yw6ZUrKbt1uNbm4bVpd0uLGbddy9u+ekW0M23i6CNlskaSwKAJ8lgWblpRCkkaTkPhF5BL7pOK1K7SXB6cmh+ASl+7y3RmtNW386jNND2v+Wasbybks1abQAPKli3AtHDQmwUvKVoyjQBuwlks/b/KVE6GKPbD8Gij3na6OVtN8iJKThn8o65CcZP5Dk5MzOf8FUEsDBBQAAAgIAABAIez1U62bbAAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM01VFQSi9KLMgoBooYgjilmSkgdrRSklFqkpGJpUGKqaW5Raplsi6QTEtOMUlLTEw1tzA0NlCKBaovqSxI9UvMTYXoCUgsyUjLzEvJzEvXcy/KTHEHGa0UWwsAUEsBAi0AFAAACAgAAEAh7B0qOsZ9AgAAJwUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAEAh7PVTrZtsAAAAeAAAAAkAJAAAAAAAAAAAAAAAygIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAACBAwAAAAA=
+      value: UEsDBBQAAAgIAABAIezgpNz4aAIAAA8FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxHT57ax1CeiDJhHRy8UVYa6xBljySHCAZ/ntXssAu4WDkffvx9u3KX4RLU0NulV5pztaKAfk5IO5Mfgw68BGOdKfkhn/CxeedM1s6J+p9XqnlCu2xCzOqAqt5/kvuhHOO0NhIXihdLdkOUmWsQXNBhQGEtLIuWqLpa0CO+DdcuJATnpKZO33iaRENznjMQVrQnevFcRiN4oX/JfMQ0QY0Mhe0qoE59l1cEo8mIXQ6mnhPia0Fp8iDuRKCm8CM2FPtO09pbRrsCx0Yp9ipp5Pgawl8V9rwcg1+LgoDNlDV9HTPNQrWZiW/VatiRc2+JfdBRePqTOLEs2qTrr/hw9jDhVbV46VuHLkatuT5/pWecmpsT+a++b4jHnuNDlTs6VbAewnySa20aiRD0OrGhTYGkvvu9dpaWkK+7+wt1RtjU38fVjK6m4/j+fRuuhxGszAu19DZS3FMBa+2fgzj1rARyovv9wI0DuoPsvdbY0JetDpKfw280V1/vQLwwLWxCIWWpeO6VY12rmTpBXStNTZVWoI3hw5qkFTY0wumsbfzvMF6ZW+QB+ouUigesMv9uAnx5s4/im6gF3W4Ts6U6rAGUz43VnAJHWkHPKFOqZKyXbe+JpewTaMLmvfCdg1n/+8Z2SawTcaLiE0Wszks8iE+i5yNC0phNo/vIuIXkUvsk4qXlmiQB6cmu+QSl+7yfRmsNK396jNNDyv+Wame5FwWapNrAPncZrgSB41F8JKyJeMo0Aas5dLPm3xlRKh8Dyy7Jsp8p8uj1TTrsmSk5h/KOktGUv9ByciZnP8BUEsDBBQAAAgIAABAIez1U62bbAAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM01VFQSi9KLMgoBooYgjilmSkgdrRSklFqkpGJpUGKqaW5Raplsi6QTEtOMUlLTEw1tzA0NlCKBaovqSxI9UvMTYXoCUgsyUjLzEvJzEvXcy/KTHEHGa0UWwsAUEsBAi0AFAAACAgAAEAh7OCk3PhoAgAADwUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAEAh7PVTrZtsAAAAeAAAAAkAJAAAAAAAAAAAAAAAtQIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABsAwAAAAA=
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5136916917dc8949b3caac1eabfe648, type: 3}
@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875497684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3479815, y: -0.044831313, z: -3.0039062}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1405489509}
@@ -444,7 +444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185422826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.348, y: 4.358, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 875497685}
@@ -474,7 +474,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24.06, y: 1}
+  m_Size: {x: 24, y: 0.9}
   m_EdgeRadius: 0
 --- !u!1 &1203780870
 GameObject:
@@ -648,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 1221503274140661998, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.57
+      value: 1.33
       objectReference: {fileID: 0}
     - target: {fileID: 1221503274140661998, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}
@@ -826,6 +826,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8425234867763426296, guid: d3a82eefc9dce5e4f885717d5154b259,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8493846973349387341, guid: d3a82eefc9dce5e4f885717d5154b259,
         type: 3}
       propertyPath: crosshair
@@ -938,7 +943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347394636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.348, y: -4.693, z: 0}
+  m_LocalPosition: {x: 0, y: -3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 875497685}
@@ -968,7 +973,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24.06, y: 1}
+  m_Size: {x: 24, y: 0.9}
   m_EdgeRadius: 0
 --- !u!4 &1364761467 stripped
 Transform:
@@ -1001,7 +1006,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1405489508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.687, y: 0.08, z: 0}
+  m_LocalPosition: {x: -11.1, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 875497685}
@@ -1031,7 +1036,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.09, y: 13.5}
+  m_Size: {x: 0.7, y: 13.5}
   m_EdgeRadius: 0
 --- !u!1001 &1442192049
 PrefabInstance:
@@ -1238,7 +1243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693489573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.999, y: 0.08, z: 0}
+  m_LocalPosition: {x: 11.1, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 875497685}
@@ -1268,7 +1273,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.09, y: 13.5}
+  m_Size: {x: 0.7, y: 13.5}
   m_EdgeRadius: 0
 --- !u!1 &1913698235
 GameObject:
