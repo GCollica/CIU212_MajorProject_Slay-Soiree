@@ -7,7 +7,7 @@ public class BasicEnemy1 : MonoBehaviour
     /*Script that will be attached to each basic enemy 1 gameobject throughout the game. Holds individual values for damage, resistance, health & movement speed and feeds that into it's own instance of the BasicEnemyClass. */
 
     public BasicEnemyClass basicEnemyClass;
-    private BasicEnemy1_AI basicEnemyAI;
+    private Enemy_AI basicEnemyAI;
 
     public float startingDamage = 5f;
     public float startingResistance = 10f;
@@ -17,7 +17,7 @@ public class BasicEnemy1 : MonoBehaviour
     
     void Awake()
     {
-        basicEnemyAI = this.gameObject.GetComponent<BasicEnemy1_AI>();
+        basicEnemyAI = this.gameObject.GetComponent<Enemy_AI>();
 
         if (gameObject.name == "BOSS")
         {

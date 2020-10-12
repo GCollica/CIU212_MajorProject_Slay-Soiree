@@ -245,6 +245,8 @@ GameObject:
   - component: {fileID: 7334487099684849211}
   - component: {fileID: 7334487099684849210}
   - component: {fileID: 7334487099684849213}
+  - component: {fileID: 6472510909396399804}
+  - component: {fileID: 4188495869913812483}
   m_Layer: 10
   m_Name: BasicEnemy1
   m_TagString: Untagged
@@ -333,9 +335,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAIState: 0
-  attackTargets: []
-  attackCoolDownTimer: 0
-  attackCoolDownDuration: 3
+  totalPlayers: []
+  currentTargetTransform: {fileID: 0}
+  basicEnemy1Script: {fileID: 0}
 --- !u!50 &7334487099684849210
 Rigidbody2D:
   serializedVersion: 4
@@ -373,6 +375,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.5
+--- !u!114 &6472510909396399804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334487099684849607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a98418b663a9b4fab704d7b3a0395e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackTargets: []
+  inAttackRange: 0
+  isAttacking: 0
+  attackCoolingDown: 0
+  attackCoolDownTimer: 0
+  attackCoolDownDuration: 3
+--- !u!114 &4188495869913812483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334487099684849607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429960b68a235d74fac8567c369393da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 0}
 --- !u!1 &7334487099823581943
 GameObject:
   m_ObjectHideFlags: 0
